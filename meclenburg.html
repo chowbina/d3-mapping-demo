@@ -44,9 +44,9 @@
             projection.scale(s).translate(t);
 
 
-        d3.csv('data/nc_city_zip_rand.csv', function(cities) {
+        d3.csv('data/nc_city_zip_rand.csv', function(zips) {
             var rateById = {};
-            cities.forEach(function (d) {
+            zips.forEach(function (d) {
                 rateById[d.id] = +d.rate;
             });
 
@@ -59,10 +59,10 @@
                         return threshold(rateById[pt.id]);
                     });
  
-        var cityPoints = svg.selectAll('circle').data(cities);
+        var zipPoints = svg.selectAll('circle').data(zips);
         var radius = d3.scale.linear().domain([0,100]).range([5,30]);
 
-          cityPoints.enter()
+          zipPoints.enter()
               .append('circle')
               .attr('cx', function(d) {return projection([d.lon, d.lat])[0]})
               .attr('cy', function(d) {return projection([d.lon, d.lat])[1]})
