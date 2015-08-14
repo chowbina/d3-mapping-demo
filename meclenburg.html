@@ -29,8 +29,6 @@
             .attr("width", width)
             .attr("height", height);
 
-    var g = svg.append("g");
-
     var threshold = d3.scale.threshold()
     .domain([20000, 40000, 60000, 80000])
     .range(["#6e7c5a", "#a0b28f", "#d8b8b3", "#b45554", "#760000"]);
@@ -52,7 +50,7 @@
                 rateById[d.id] = +d.rate;
             });
 
-            g.append("g")
+            svg.append("g")
                     .selectAll("path")
                     .data(topojson.feature(us, us.objects.counties).features)
                     .enter().append("path")
