@@ -31,15 +31,9 @@
 
     var g = svg.append("g");
 
-    // A position encoding for the key only.
-    var x = d3.scale.linear()
-    .domain([0, 100000])
-    .range([0, 240]);
-
     var threshold = d3.scale.threshold()
     .domain([20000, 40000, 60000, 80000])
     .range(["#6e7c5a", "#a0b28f", "#d8b8b3", "#b45554", "#760000"]);
-
 
     d3.json("data/topo_nc_zipcode.json", function (error, us) {
         var states = topojson.feature(us, us.objects.counties);
