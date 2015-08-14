@@ -53,13 +53,12 @@
             });
 
             g.append("g")
-                    .attr("class", "counties")
                     .selectAll("path")
                     .data(topojson.feature(us, us.objects.counties).features)
                     .enter().append("path")
                     .attr("d", path)
-                    .style("fill", function (d) {
-                        return threshold(rateById[d.id]);
+                    .style("fill", function (pt) {
+                        return threshold(rateById[pt.id]);
                     });
  
         var cityPoints = svg.selectAll('circle').data(cities);
