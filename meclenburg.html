@@ -23,7 +23,7 @@
     var width = 1060, height = 600;
 
     var projection = d3.geo.albers();
-    var path = d3.geo.path().projection(projection);
+    var geoPath = d3.geo.path().projection(projection);
 
     var svg = d3.select("body").append("svg")
             .attr("width", width)
@@ -38,7 +38,7 @@
 
             var b, s, t;
             projection.scale(1).translate([0, 0]);
-            var b = path.bounds(states); // zoom to the county
+            var b = geoPath.bounds(states); // zoom to the county
             var s = .9 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
             var t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
             projection.scale(s).translate(t);
@@ -54,7 +54,7 @@
                     .selectAll("path")
                     .data(topojson.feature(us, us.objects.counties).features)
                     .enter().append("path")
-                    .attr("d", path)
+                    .attr("d", geoPath)
                     .style("fill", function (pt) {
                         return threshold(rateById[pt.id]);
                     });
